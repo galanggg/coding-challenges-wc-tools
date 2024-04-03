@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -28,5 +29,22 @@ func main() {
 		}
 		fmt.Println(count)
 		defer readFile.Close()
+	}
+	if argsWithoutProg[0] == "-w" {
+		readFile, err := os.ReadFile(myFile)
+		if err != nil {
+			fmt.Println(err)
+		}
+		result := strings.Fields(string(readFile))
+		fmt.Println(len(result), myFile)
+	}
+	if argsWithoutProg[0] == "-m" {
+		readFile, err := os.ReadFile(myFile)
+		if err != nil {
+			fmt.Println(err)
+		}
+		data := string(readFile)
+		result :=  len(([]rune)(data))
+		fmt.Println(result, myFile)
 	}
 }
